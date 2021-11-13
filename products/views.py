@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from products.functions import get_cards
 # Create your views here.
 
 
@@ -11,8 +11,10 @@ def index(request):
 
 
 def products(request):
+    data = get_cards()['cards']
     context = {
         'title': 'geekshop',
+        'cards': data
     }
     return render(request, 'products/products.html', context)
 
