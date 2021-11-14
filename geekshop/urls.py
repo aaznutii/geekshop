@@ -20,13 +20,6 @@ from products.views import index, products
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
-
-
-# Добавлены ссылки на функции, render  index.html, products.html
-urlpatterns += [
-    path('', index, name='name'),
-    # Не знаю по какой причине, но открывается ссылка на сервер  http://127.0.0.1:8000/catalog/
-    # "GET /catalog/ HTTP/1.1" 404 2342. При прямом переходе переходит корректно.
+    path('', index, name='index'),
     path('products/', products, name='products'),
 ]

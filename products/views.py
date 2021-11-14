@@ -1,11 +1,20 @@
 from django.shortcuts import render
-
+from products.functions import get_cards
 # Create your views here.
 
 
 def index(request):
-    return render(request, 'index.html')
+    context = {
+        'title': 'geekshop',
+    }
+    return render(request, 'products/index.html', context)
 
 
 def products(request):
-    return render(request, 'products.html')
+    data = get_cards()['cards']
+    context = {
+        'title': 'geekshop',
+        'cards': data
+    }
+    return render(request, 'products/products.html', context)
+
