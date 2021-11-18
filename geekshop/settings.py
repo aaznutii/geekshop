@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # Регистрация приложения по форме, рекомендованной django:
     # https://developer.mozilla.org/ru/docs/Learn/Server-side/Django/skeleton_website
     # Ссылка идет на класс ProductsConfig файла apps проекта products
-    'products.apps.ProductsConfig'
+    'products.apps.ProductsConfig',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +128,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # Указана папка расположения статических файлов
 STATICFILES_DIRS = (BASE_DIR / 'static',)
+
+# Указание на базовую директорию медиа и медиа - url
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
