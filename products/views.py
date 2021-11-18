@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from products.models import Product
-from products.functions import get_cards
 # Create your views here.
 
 
