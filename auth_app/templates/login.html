@@ -14,6 +14,8 @@
             </div>
             <div class="card-body">
                 <form action="{% url 'auth_app:login' %}" method="post">
+
+                    {# Обязательно для работы с POST запросами #}
                     {% csrf_token %}
                     <div class="form-group">
                         <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>
