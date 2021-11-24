@@ -5,13 +5,15 @@ from products.models import Product, ProductCategory
 
 
 def load_from_json(file_name):
+    # Получение данных из файлов json
     with open(file_name, mode='r', encoding='utf8') as infile:
         return json.load(infile)
 
 
 class Command(BaseCommand):
+    # Загрузка данных в базу данных из json команда: py -3 .\manage.py fill_db
     def handle(self, *args, **options):
-        categories = load_from_json('../../fixtures/categories.json')
+        categories = load_from_json('products/fixtures/main_products_productcategory.json')
 
         ProductCategory.objects.all().delete()
         for category in categories:
@@ -20,7 +22,7 @@ class Command(BaseCommand):
             new_category = ProductCategory(**cat)
             new_category.save()
 
-        products = load_from_json('../../fixtures/products.json')
+        products = load_from_json('products/fixtures/main_products_product.json')
 
         Product.objects.all().delete()
         for product in products:
