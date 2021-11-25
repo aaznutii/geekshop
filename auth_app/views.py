@@ -1,11 +1,14 @@
 from django.shortcuts import render
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 from django.urls import reverse
 
-from auth_app.forms import UserLoginForm, UserRegisterForm
+from auth_app.forms import UserLoginForm, UserRegisterForm, UserProfileForm
+from baskets.models import Basket
 
 
 def login(request):
@@ -15,9 +18,13 @@ def login(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = auth.authenticate(username=username, password=password)
-            if user.is_active:
-                auth.login(request, user)
-                return HttpResponseRedirect(reverse('index'))
+            # Добавлена проверка поскольку при выходе user возвращает NonType
+            try:
+                if user.is_active:
+                    auth.login(request, user)
+                    return HttpResponseRedirect(reverse('index'))
+            except AttributeError:
+                return render(request, 'products/index.html')
         else:
             print(form.errors)
     else:
@@ -34,6 +41,7 @@ def register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             form.save()
+            # messages.
             return HttpResponseRedirect(reverse('auth_app:login'))
         else:
             print(form.errors)
@@ -48,3 +56,20 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return render(request, 'products/index.html')
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+       form = UserProfileForm(instance=request.user,data=request.POST,files=request.FILES)
+       if form.is_valid():
+           form.save()
+       else:
+           print(form.errors)
+
+    context = {
+        'title': 'Geekshop | Профайл',
+        'form' : UserProfileForm(instance=request.user),
+        'baskets': Basket.objects.filter(user=request.user)
+    }
+    return render(request, 'profile.html', context)

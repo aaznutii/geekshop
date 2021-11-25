@@ -39,7 +39,7 @@
                 {% endif %}
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="auth/profile.html">User
+                    <a class="nav-link" href="{% url 'auth_app:profile' %}">User
                         <i class="fas fa-user-circle"></i>
                     </a>
                 </li>

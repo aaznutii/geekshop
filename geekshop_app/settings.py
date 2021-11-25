@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     # https://developer.mozilla.org/ru/docs/Learn/Server-side/Django/skeleton_website
     # Ссылка идет на класс ProductsConfig файла apps проекта products
     'products',
-    'auth_app'
+    'auth_app',
+    'baskets'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 7,
+    "name": "Худи черного цвета с монограммами adidas Originals",
+    "image": "products_images/Adidas-hoodie.png",
+    "short_desc": "",
+    "description": "Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.",
+    "price": 6090,
+    "quantity": 100,
+    "category_id": 4
+  },
+  {
+    "id": 8,
+    "name": "Синяя куртка The North Face",
+    "image": "products_images/Blue-jacket-The-North-Face.png",
+    "short_desc": "",
+    "description": "Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый пуховый наполнитель.",
+    "price": 23725,
+    "quantity": 15,
+    "category_id": 4
+  },
+  {
+    "id": 9,
+    "name": "Коричневый спортивный oversized-топ ASOS DESIGN",
+    "image": "products_images/Brown-sports-oversized-top-ASOS-DESIGN.png",
+    "short_desc": "",
+    "description": "Материал с плюшевой текстурой. Удобный и мягкий.",
+    "price": 3390,
+    "quantity": 20,
+    "category_id": 4
+  },
+  {
+    "id": 10,
+    "name": "Черный рюкзак Nike Heritage",
+    "image": "products_images/Black-Nike-Heritage-backpack.png",
+    "short_desc": "",
+    "description": "Плотная ткань. Легкий материал.",
+    "price": 2340,
+    "quantity": 5,
+    "category_id": 5
+  },
+  {
+    "id": 11,
+    "name": "Черные туфли на платформе с 3 парами люверсов Dr Martens 1461 Bex",
+    "image": "products_images/Black-Dr-Martens-shoes.png",
+    "short_desc": "",
+    "description": "Гладкий кожаный верх. Натуральный материал.",
+    "price": 13590,
+    "quantity": 13,
+    "category_id": 6
+  },
+  {
+    "id": 12,
+    "name": "Темно-синие широкие строгие брюки ASOS DESIGN",
+    "image": "products_images/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png",
+    "short_desc": "",
+    "description": "Легкая эластичная ткань сирсакер Фактурная ткань.",
+    "price": 2890,
+    "quantity": 20,
+    "category_id": 7
+  }
+]
