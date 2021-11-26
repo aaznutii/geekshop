@@ -5,13 +5,15 @@ from products.models import Product, ProductCategory
 
 def index(request):
     context = {
-        'title': 'geekshop_app',
+        'title': 'geekshop',
     }
     return render(request, 'products/index.html', context)
 
 
 def products(request):
-    context = {'title': 'geekshop_app'}
+    context = {
+        'title': 'Geekshop | Каталог',}
+
     context['products'] = Product.objects.all()
     context['productcategory'] = ProductCategory.objects.all()
     return render(request, 'products/products.html', context)
