@@ -24,9 +24,10 @@ def login(request):
                     auth.login(request, user)
                     return HttpResponseRedirect(reverse('index'))
             except AttributeError:
-                return render(request, 'products/index.html')
+                pass
+                # return render(request, 'products/index.html')
         else:
-            print(form.errors)
+            messages.error(request, f'Введите корректные данные.')
     else:
         form = UserLoginForm()
     context = {
@@ -41,10 +42,10 @@ def register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             form.save()
-            # messages.
+            messages.success(request, 'Вы успешно зарегистрировались.')
             return HttpResponseRedirect(reverse('auth_app:login'))
         else:
-            print(form.errors)
+            messages.error(request, f'Ошибочные данные.')
     else:
         form = UserRegisterForm()
     context = {
@@ -65,8 +66,7 @@ def profile(request):
        if form.is_valid():
            form.save()
        else:
-           print(form.errors)
-
+           messages.error(request, 'Ошибка формы')
     context = {
         'title': 'Geekshop | Профайл',
         'form' : UserProfileForm(instance=request.user),

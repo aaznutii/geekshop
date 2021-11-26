@@ -21,6 +21,8 @@ class UserLoginForm(AuthenticationForm):
         data = self.cleaned_data['username']
         if not data.isalpha():
             raise  ValidationError('Имя пользователя не может состоять из цифр')
+        return data
+
 
 class UserRegisterForm(UserCreationForm):
 
@@ -39,6 +41,22 @@ class UserRegisterForm(UserCreationForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
+    # Переопределение валидатора
+    def clean_username(self):
+        data = self.cleaned_data['username']
+        if len(data) < 2:
+            raise  ValidationError('Имя пользователя не может быть таким коротким')
+        else:
+            return data
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise ValidationError('Пароли не совпадают. Проверьте правильность указания паролей')
+        else:
+            return password2
+
 
 class UserProfileForm(UserChangeForm):
     image = forms.ImageField(widget=forms.FileInput(), required=False)
@@ -56,3 +74,10 @@ class UserProfileForm(UserChangeForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
+
+    def clean_image(self):
+        data_size = self.cleaned_data['image'].size
+        if data_size < 2097152: #
+            return self.cleaned_data['image']
+        else:
+            raise ValidationError('Вы выбрали слишком большой файл')

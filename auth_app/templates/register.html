@@ -7,7 +7,8 @@
         <div class="alert alert-warning alert-dismissible fade show" role="alert"
              style="margin-top: 50px;">
             {% for error in form.errors %}
-            <strong>Error!</strong> {{ error }}.
+            <strong>Ошибка!</strong> {{ error }}.
+                {{ error | escape }}
             {% endfor %}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

@@ -59,7 +59,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # Указание на положение папки templates
         'DIRS': [BASE_DIR / 'products/templates',
-                 BASE_DIR / 'auth_app/templates']
+                 BASE_DIR / 'auth_app/templates',
+                 BASE_DIR / 'baskets/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -141,3 +142,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'auth_app.User'
+LOGIN_URL = '/users/login/'
