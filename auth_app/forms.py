@@ -79,5 +79,6 @@ class UserProfileForm(UserChangeForm):
         data_size = self.cleaned_data['image'].size
         if data_size < 2097152: #
             return self.cleaned_data['image']
+
         else:
             raise ValidationError('Вы выбрали слишком большой файл')

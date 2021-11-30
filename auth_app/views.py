@@ -64,12 +64,19 @@ def profile(request):
     if request.method == 'POST':
        form = UserProfileForm(instance=request.user,data=request.POST,files=request.FILES)
        if form.is_valid():
+           messages.set_level(request, messages.SUCCESS)
+           messages.success(request, 'Изменения сохранены', extra_tags='success')
            form.save()
        else:
-           messages.error(request, 'Ошибка формы')
+           messages.set_level(request, messages.ERROR)
+           messages.error(request, 'Ошибка формы', extra_tags='error')
+    total_quantity = sum(bask.quantity for bask in Basket.objects.filter(user=request.user))
+    total_sum = sum(bask.sum() for bask in Basket.objects.filter(user=request.user))
     context = {
         'title': 'Geekshop | Профайл',
         'form' : UserProfileForm(instance=request.user),
-        'baskets': Basket.objects.filter(user=request.user)
+        'baskets': Basket.objects.filter(user=request.user),
+        'total_quantity': total_quantity,
+        'total_sum': total_sum
     }
     return render(request, 'profile.html', context)
