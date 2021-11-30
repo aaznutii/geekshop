@@ -1,4 +1,6 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.core.exceptions import ValidationError
+from django import forms
 from auth_app.models import User
 
 
@@ -13,6 +15,13 @@ class UserLoginForm(AuthenticationForm):
         self.fields['password'].widget.attrs['placeholder'] = 'Введите пароль'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+
+    # Переопределение валидатора
+    def clean_username(self):
+        data = self.cleaned_data['username']
+        if not data.isalpha():
+            raise  ValidationError('Имя пользователя не может состоять из цифр')
+        return data
 
 
 class UserRegisterForm(UserCreationForm):
@@ -31,3 +40,44 @@ class UserRegisterForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Повторите пароль'
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+
+    # Переопределение валидатора
+    def clean_username(self):
+        data = self.cleaned_data['username']
+        if len(data) < 2:
+            raise  ValidationError('Имя пользователя не может быть таким коротким')
+        else:
+            return data
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise ValidationError('Пароли не совпадают. Проверьте правильность указания паролей')
+        else:
+            return password2
+
+
+class UserProfileForm(UserChangeForm):
+    image = forms.ImageField(widget=forms.FileInput(), required=False)
+    age = forms.IntegerField(widget=forms.NumberInput(), required=False)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', 'image', 'age')
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['readonly'] = True
+        self.fields['email'].widget.attrs['readonly'] = True
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control py-4'
+        self.fields['image'].widget.attrs['class'] = 'custom-file-input'
+
+    def clean_image(self):
+        data_size = self.cleaned_data['image'].size
+        if data_size < 2097152: #
+            return self.cleaned_data['image']
+        else:
+            raise ValidationError('Вы выбрали слишком большой файл')

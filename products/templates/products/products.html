@@ -71,12 +71,18 @@
                                 <p class="card-text">{{ product.description }}</p>
                             </div>
                             <div class="card-footer text-center">
-{#                                {% if card.status  %}#}
+{#                            Добавлена проверка, что это авторизованный пользователь#}
+                                {% if user.id is not None  %}
+                                    <a href="{% url 'baskets:basket_add' product.id %}"
+                                       class="btn btn-outline-success">Отправить в корзину</a>
 {#                                <button type="button" class="btn btn-outline-danger">Убрать из корзины</button>#}
 {#                                {% else %}#}
 {#                                    <button type="button" class="btn btn-outline-success">Отправить в корзину</button>#}
-{#                                {% endif %}#}
-                                <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
+                                    {% else %}
+                                       <a href="{% url 'auth_app:login' %}"
+                                       class="btn btn-outline-success">Отправить в корзину</a>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>
@@ -109,7 +115,7 @@
         <!-- Footer -->
         <footer class="py-5 bg-dark">
             <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; GeekShop 2020</p>
+                <p class="m-0 text-center text-white">Copyright &copy; GeekShop 2021</p>
             </div>
             <!-- /.container -->
         </footer>

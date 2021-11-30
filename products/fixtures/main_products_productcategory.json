@@ -1,0 +1,27 @@
+[
+  {
+    "id": 4,
+    "name": "Одежда",
+    "description": "Описание для класса одежды"
+  },
+  {
+    "id": 5,
+    "name": "Аксесуары",
+    "description": ""
+  },
+  {
+    "id": 6,
+    "name": "Обувь",
+    "description": ""
+  },
+  {
+    "id": 7,
+    "name": "Новинки",
+    "description": ""
+  },
+  {
+    "id": 8,
+    "name": "Подарки",
+    "description": ""
+  }
+]
