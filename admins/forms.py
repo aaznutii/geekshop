@@ -1,6 +1,7 @@
 from auth_app.forms import UserRegisterForm, UserProfileForm
 from django import forms
 from auth_app.models import User
+from products.models import Product, ProductCategory
 
 class UserAdminRegisterForm(UserRegisterForm):
     image = forms.ImageField(widget=forms.FileInput(), required=False)
@@ -28,3 +29,16 @@ class UserAdminProfileForm(UserProfileForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
+
+class CategotyAdminForm(forms.ModelForm):
+    name = forms.TextInput()
+    description = forms.TextInput()
+    class Meta:
+        model = ProductCategory
+        fields = ('name', 'description')
+
+    def __init__(self, *args, **kwargs):
+        super(CategotyAdminForm, self).__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control py-4'
