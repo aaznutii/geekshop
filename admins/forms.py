@@ -42,3 +42,24 @@ class CategotyAdminForm(forms.ModelForm):
 
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+
+
+class ProductAdminForm(forms.ModelForm):
+    image = forms.ImageField(widget=forms.FileInput(), required=False)
+    name = forms.TextInput()
+    description = forms.TextInput()
+    price = forms.NumberInput()
+    quantity = forms.NumberInput()
+    category_id = forms.ModelChoiceField(ProductCategory.objects.all())
+
+    class Meta:
+        model = Product
+        fields = ('name', 'description', 'price', 'quantity')
+
+    def __init__(self, *args, **kwargs):
+        super(ProductAdminForm, self).__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control py-4'
+        self.fields['image'].widget.attrs['class'] = 'custom-file-input'
+        self.fields['category_id'].widget.attrs['class'] = 'form-select mb-3'
