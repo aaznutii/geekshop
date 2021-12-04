@@ -34,7 +34,7 @@ def login(request):
         'title': 'Geekshop | Авторизация',
         'form': form
     }
-    return render(request, 'login.html', context)
+    return render(request, 'auth_app/login.html', context)
 
 
 def register(request):
@@ -51,7 +51,7 @@ def register(request):
     context = {
         'title': 'Geekshop | Регистрация',
         'form': form}
-    return render(request, 'register.html', context)
+    return render(request, 'auth_app/register.html', context)
 
 
 def logout(request):
@@ -79,4 +79,4 @@ def profile(request):
         'total_quantity': total_quantity,
         'total_sum': total_sum
     }
-    return render(request, 'profile.html', context)
+    return render(request, 'auth_app/profile.html', context)
