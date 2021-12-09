@@ -10,7 +10,9 @@ app_name = "products"
 
 urlpatterns = [
     path('', products, name='products'),
-    path('detail/<int:pk>/', ProductDetail.as_view(), name='detail')
+    path('detail/<int:pk>/', ProductDetail.as_view(), name='detail'),
+    path('page/<int:page>', products, name='page'),
+    path('detail/<int:pk>/', ProductDetail.as_view(), name='detail'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
