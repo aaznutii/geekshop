@@ -1,3 +1,6 @@
+import hashlib
+import random
+
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 from django import forms
@@ -56,6 +59,12 @@ class UserRegisterForm(UserCreationForm):
             raise ValidationError('Пароли не совпадают. Проверьте правильность указания паролей')
         else:
             return password2
+
+    def save(self, commit=True):
+        user = super(UserRegisterForm, self).save()
+        user.is_active = False
+        salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
+#         pass///
 
 
 class UserProfileForm(UserChangeForm):
