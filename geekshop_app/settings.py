@@ -34,12 +34,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Регистрация приложения по форме, рекомендованной django:
-    # https://developer.mozilla.org/ru/docs/Learn/Server-side/Django/skeleton_website
-    # Ссылка идет на класс ProductsConfig файла apps проекта products
     'products',
     'auth_app',
-    'baskets'
+    'baskets',
+    'admins',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +58,8 @@ TEMPLATES = [
         # Указание на положение папки templates
         'DIRS': [BASE_DIR / 'products/templates',
                  BASE_DIR / 'auth_app/templates',
-                 BASE_DIR / 'baskets/templates']
+                 BASE_DIR / 'baskets/templates',
+                 BASE_DIR / 'admins/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
