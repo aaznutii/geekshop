@@ -1,3 +1,6 @@
+import hashlib
+import random
+
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 from django import forms
@@ -57,6 +60,12 @@ class UserRegisterForm(UserCreationForm):
         else:
             return password2
 
+    def save(self, commit=True):
+        user = super(UserRegisterForm, self).save()
+        user.is_active = False
+        salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
+#         pass///
+
 
 class UserProfileForm(UserChangeForm):
     image = forms.ImageField(widget=forms.FileInput(), required=False)
@@ -79,5 +88,6 @@ class UserProfileForm(UserChangeForm):
         data_size = self.cleaned_data['image'].size
         if data_size < 2097152: #
             return self.cleaned_data['image']
+
         else:
             raise ValidationError('Вы выбрали слишком большой файл')
