@@ -34,12 +34,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Регистрация приложения по форме, рекомендованной django:
-    # https://developer.mozilla.org/ru/docs/Learn/Server-side/Django/skeleton_website
-    # Ссылка идет на класс ProductsConfig файла apps проекта products
     'products',
     'auth_app',
-    'baskets'
+    'baskets',
+    'admins',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +58,8 @@ TEMPLATES = [
         # Указание на положение папки templates
         'DIRS': [BASE_DIR / 'products/templates',
                  BASE_DIR / 'auth_app/templates',
-                 BASE_DIR / 'baskets/templates']
+                 BASE_DIR / 'baskets/templates',
+                 BASE_DIR / 'admins/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -143,3 +142,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'auth_app.User'
 LOGIN_URL = '/users/login/'
+
+SOCIAL_AUTH_VK_QAUYH2_KEY = 8028040
+SOCIAL_AUTH_VK_QAUYH2_SECRET = 8
+SOCIAL_AUTH_VK_QAUYH2_API_VERSION = '5.131'
+SOCIAL_AUTH_VK_QAUYH2_API_IGNORE_DEFAULT_SCOPE = True
+
+# id = 8028040
+#  key =
