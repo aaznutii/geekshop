@@ -18,3 +18,4 @@ class User(AbstractUser):
     def is_activation_key_expires(self):
         if now() <= self.activation_key_expires + timedelta(hours=48):
             pass
+
